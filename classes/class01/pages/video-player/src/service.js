@@ -1,5 +1,7 @@
-const EAR_THRESHOLD = 0.27;
+import { prepareRunChecker } from "../../../lib/shared/util.js"
 
+const {shouldRun} = prepareRunChecker({timerDelay: 500})
+const EAR_THRESHOLD = 0.27;
 export default class Service {
     #model = null
     #faceLandmarksDetection
@@ -33,10 +35,11 @@ export default class Service {
 
     async handBlinked(video){
         const predictions = await this.#estimateFaces(video)
-        console.log(predictions)
-        if (predictions.length > 0) return false
+        // console.log({predictions})
+        if (!predictions.length) return false
         for(const prediction of predictions){
             // Right eye parameters
+            // console.log({prediction})
             const lowerRight = prediction.annotations.rightEyeUpper0;
             const upperRight = prediction.annotations.rightEyeLower0;
             const rightEAR = this.#getEAR(upperRight, lowerRight);
@@ -48,6 +51,7 @@ export default class Service {
               // True if the eye is closed
             const blinked = leftEAR <= EAR_THRESHOLD && rightEAR <= EAR_THRESHOLD;
             if(!blinked) continue;
+            if(!shouldRun()) continue
 
             return blinked  
             }
