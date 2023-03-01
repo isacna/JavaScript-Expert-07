@@ -14,9 +14,9 @@ const [rootPath] = window.location.href.split("/pages/");
 const factory = {
   async initalize() {
     return HandGestureController.initialize({
+      camera,
       view: new HandGestureView(),
       service: new HandGestureService({
-        camera,
         fingerpose: window.fp,
         handPoseDetection: window.handPoseDetection,
         handsVersion: window.VERSION
