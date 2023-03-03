@@ -12,7 +12,7 @@ Marque esse projeto com uma estrela 🌟
 - Este projeto foi criado usando Node.js v19.6
 
 ## Live demo
-- Para testar o projeto final, [clique aqui]()
+- Para testar o projeto final, [clique aqui](https://isacna.github.io/JavaScript-Expert-07/classes/class04/pages/titles/)
 
 ## Running
 
